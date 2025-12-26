@@ -1,23 +1,31 @@
 import discord
 from discord.ext import commands
 import asyncio
+import os # Добавляем этот модуль
 
-# Токен бота
-BOT_TOKEN = 
+# Бот будет брать токен из "Переменных окружения" на хостинге
+BOT_TOKEN = os.getenv('BOT_TOKEN') 
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 async def main():
     async with bot:
-        # загружаем все cogs
-        await bot.load_extension("rules")
-        await bot.load_extension("antiflood")
-        await bot.load_extension("warns")
-        await bot.load_extension("moderation")
-        await bot.load_extension("experience")
-        await bot.load_extension("help_command")
+        # Загружаем коги
+        # Убедись, что названия файлов совпадают (например, rules.py)
+        extensions = ["rules", "antiflood", "warns", "moderation", "experience", "help_command"]
         
-        await bot.start(BOT_TOKEN)
+        for extension in extensions:
+            try:
+                await bot.load_extension(extension)
+                print(f"Модуль {extension} успешно загружен.")
+            except Exception as e:
+                print(f"Ошибка загрузки {extension}: {e}")
+        
+        if BOT_TOKEN:
+            await bot.start(BOT_TOKEN)
+        else:
+            print("ОШИБКА: Токен не найден! Проверь переменные окружения на BotHost.")
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

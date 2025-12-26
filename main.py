@@ -3,8 +3,9 @@ from discord.ext import commands
 import asyncio
 import os # Добавляем этот модуль
 
-# Бот будет брать токен из "Переменных окружения" на хостинге
-BOT_TOKEN = os.getenv('BOT_TOKEN') 
+# Было: BOT_TOKEN = os.getenv('BOT_TOKEN')
+# Стало:
+BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)

@@ -14,7 +14,7 @@ async def main():
     async with bot:
         # Загружаем коги
         # Убедись, что названия файлов совпадают (например, rules.py)
-        extensions = ["rules", "antiflood", "warns", "moderation", "regslay", "reaction_roles", "experience", "help_command"]
+        extensions = ["rules", "antiflood", "warns", "moderation", "regslay", "reaction_roles", "help_command"]
         
         for extension in extensions:
             try:

@@ -31,6 +31,7 @@ async def main():
             "rules",
             "antiflood",
             "warns",
+            "tickets",
             "moderation",
             "regslay",
             "reaction_roles",

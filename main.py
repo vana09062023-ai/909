@@ -36,7 +36,8 @@ async def main():
             "regslay",
             "reaction_roles",
             "help_command",
-            "newyear"
+            "newyear",
+            "welcome"
         ]
 
         for extension in extensions:

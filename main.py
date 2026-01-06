@@ -12,6 +12,11 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
+    # ===== Регистрируем persistent views =====
+    from verification import VerificationView
+    bot.add_view(VerificationView())
+
+    # ===== Статус бота =====
     activity = discord.Streaming(
         name="Общается в скваде 909",
         url="https://twitch.tv/discord"  # ссылка обязательна
@@ -37,7 +42,8 @@ async def main():
             "reaction_roles",
             "help_command",
             "newyear",
-            "welcome"
+            "welcome",
+            "verification" 
         ]
 
         for extension in extensions:
@@ -45,7 +51,7 @@ async def main():
                 await bot.load_extension(extension)
                 print(f"Модуль {extension} успешно загружен.")
             except Exception as e:
-                print(f"Ошибка загрузки {extension}: {e}")
+                print(f"❌ Ошибка загрузки {extension}: {e}")
 
         if BOT_TOKEN:
             await bot.start(BOT_TOKEN)
